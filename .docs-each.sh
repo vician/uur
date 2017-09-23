@@ -15,6 +15,8 @@ source .uur.sh
 
 source $file
 
+mkdir -p docs
+
 doc="docs/$name.md"
 rm $doc
 touch $doc

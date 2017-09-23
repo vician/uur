@@ -11,7 +11,6 @@ if [ ! -f "$uur" ]; then
 	exit 0
 fi
 
-insidedir="."
 source .uur.sh
 
 source $uur
