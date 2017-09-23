@@ -2,6 +2,6 @@
 
 - verify sha checksums
 - verify signs
-- download to /tmp
 - how to check update? (server requiered?)
-- add simple git clonnig way (wihout releases)
+- define ubuntu version
+- tests with Vagrant for different Ubuntu releases

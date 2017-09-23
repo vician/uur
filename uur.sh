@@ -11,44 +11,74 @@ if [ ! -f "$uur" ]; then
 	exit 0
 fi
 
+
 source $uur
 
 ### Requiered ###
 # - name
-# - version
-# - ext
-# - file
+# - url
 # - depends
+# - releases archive:
+# 	- ext
+# 	- version
+### Created ###
+# - dir
+# - releases archive:
+# 	- file
+
+dir="/tmp/uur/${name}/"
 
 if [ "$ext" ]; then # Downloading release
 	# constants
-	file="$name.$version.$ext"
+	file="${dir}$name.$version.$ext"
 
 	# get the file
 	if [ ! -f "$file" ]; then
 		echo "Downloading file from $url"
-		wget -O $file "$url"
+		wget -O ${file} "$url"
+		if [ $? -ne 0 ]; then
+			echo "ERROR: Download release archive failed!"
+			exit 1
+		fi
 	else
 		echo "File already downloaded"
 	fi
+	mkdir -p $dir
 	# untar xz
 	echo "untaring"
-	tar -xf $file
+	tar -xf $file -C $dir
+	if [ $? -ne 0 ]; then
+		echo "ERROR Cannot untar release archive!"
+		exit 1
+	fi
 else # Clonning git repository
-	if [ ! -d "$name" ]; then
-		git clone $url
+	if [ ! -d "$dir" ]; then
+		mkdir -p $dir
+		git clone $url $dir
+		if [ $? -ne 0 ]; then
+			echo "ERROR: Cannot clone gir repository!"
+			exit 1
+		fi
 	else
-		cd $name
+		cd $dir
 		git pull
+		if [ $? -ne 0 ]; then
+			echo "ERROR: Cannot pull git repository!"
+			exit 1
+		fi
 	fi
 fi
 
 # install depends
 echo "Installing ${#depends[@]} depends"
 sudo apt install ${depends[*]}
+if [ $? -ne 0 ]; then
+	echo "ERROR: Cannot install requierments!"
+	exit 1
+fi
 
 # build
-build
+build $dir
 
 # install
-package
+package $dir

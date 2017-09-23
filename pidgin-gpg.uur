@@ -5,14 +5,14 @@ url="https://github.com/segler-alex/${name}"
 depends=(libpurple-dev libgpgme11-dev)
 
 build () {
-	cd $name
+	cd $1
 	autoreconf -i
 	./configure
 	make
 }
 
 package () {
-	cd $name
+	cd $1
 	mkdir -p ~/.purple/plugins
 	cp src/.libs/pidgin_gpg.so ~/.purple/plugins/
 }
