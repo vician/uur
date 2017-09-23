@@ -1,0 +1,18 @@
+#!/bin/bash
+
+name="window_merge"
+url="https://github.com/dm0-/${name}"
+depends=(git libtool autoconf pidgin pidgin-dev)
+
+build () {
+	cd $name
+	mkdir m4
+	autoreconf -fi
+	./configure
+	sudo make distcheck
+}
+
+package () {
+	cd $name
+	sudo make install
+}

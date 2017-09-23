@@ -20,21 +20,23 @@ source $uur
 # - file
 # - depends
 
-# constants
-file="$name.$version.$ext"
-dir="$name-$version"
+if [ "$ext" ]; then # Downloading release
+	# constants
+	file="$name.$version.$ext"
 
-# get the file
-if [ ! -f "$file" ]; then
-	echo "Downloading file from $url"
-	wget -O $file "$url"
-else
-	echo "File already downloaded"
+	# get the file
+	if [ ! -f "$file" ]; then
+		echo "Downloading file from $url"
+		wget -O $file "$url"
+	else
+		echo "File already downloaded"
+	fi
+	# untar xz
+	echo "untaring"
+	tar -xf $file
+else # Clonning git repository
+	git clone $url
 fi
-
-# untar xz
-echo "untaring"
-tar -xf $file
 
 # install depends
 echo "Installing ${#depends[@]} depends"
