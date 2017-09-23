@@ -35,7 +35,12 @@ if [ "$ext" ]; then # Downloading release
 	echo "untaring"
 	tar -xf $file
 else # Clonning git repository
-	git clone $url
+	if [ ! -d "$name" ]; then
+		git clone $url
+	else
+		cd $name
+		git pull
+	fi
 fi
 
 # install depends
