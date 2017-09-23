@@ -10,12 +10,12 @@ archivedir="${name}-${version}/"
 builddir="builddir"
 
 build () {
-	cd ${1}${archivedir}
+	cd ${archivedir}
 	mkdir -p $builddir
 	meson $builddir --prefix=/usr
 }
 
 package () {
-	cd ${1}${archivedir}
+	cd ${archivedir}
 	sudo ninja -C $builddir install
 }

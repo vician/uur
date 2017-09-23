@@ -29,6 +29,7 @@ source $uur
 dir="/tmp/uur/${name}/"
 
 if [ "$ext" ]; then # Downloading release
+	mkdir -p $dir
 	# constants
 	file="${dir}$name.$version.$ext"
 
@@ -43,7 +44,6 @@ if [ "$ext" ]; then # Downloading release
 	else
 		echo "File already downloaded"
 	fi
-	mkdir -p $dir
 	# untar xz
 	echo "untaring"
 	tar -xf $file -C $dir
@@ -78,7 +78,9 @@ if [ $? -ne 0 ]; then
 fi
 
 # build
+cd $dir
 build $dir
 
 # install
+cd $dir
 package $dir

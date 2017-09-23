@@ -5,14 +5,12 @@ url="https://github.com/dm0-/${name}"
 depends=(git libtool autoconf pidgin pidgin-dev)
 
 build () {
-	cd $1
-	mkdir m4
+	mkdir -p m4
 	autoreconf -fi
 	./configure
 	sudo make distcheck
 }
 
 package () {
-	cd $1
 	sudo make install
 }
