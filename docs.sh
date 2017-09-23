@@ -10,4 +10,4 @@ for uur in ${uurs[@]}; do
 	./.docs-each.sh $uur
 done
 
-ln -s index.md docs/index.md
+cp index.md docs/index.md

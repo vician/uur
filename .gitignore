@@ -1,4 +1,5 @@
 site/
+docs/
 server.pid
 .*.swp
 .*.swo
