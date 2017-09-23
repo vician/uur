@@ -1,16 +1,15 @@
 ## Download
-```
-wget -O gradio.uur https://github.com/haecker-felix/gradio/archive/v6.0.1.tar.gz
-```
+```bash
+wget -O /tmp/uur/gradio/gradio.6.0.1.tar.gz https://github.com/haecker-felix/gradio/archive/v6.0.1.tar.gz
 ```
 ## Build
-```
-    cd ${archivedir};
-    mkdir -p $builddir;
-    meson $builddir --prefix=/usr
+```bash
+cd /tmp/uur/gradio/gradio-6.0.1/
+mkdir -p builddir;
+meson builddir --prefix=/usr
 ```
 ## Install
-```
-    cd ${archivedir};
-    sudo ninja -C $builddir install
+```bash
+cd /tmp/uur/gradio/gradio-6.0.1/
+sudo ninja -C builddir install
 ```

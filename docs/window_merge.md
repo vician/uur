@@ -1,15 +1,17 @@
 ## Download
-```
-git clone https://github.com/dm0-/window_merge 
+```bash
+git clone https://github.com/dm0-/window_merge /tmp/uur/window_merge/
 ```
 ## Build
-```
-    mkdir -p m4;
-    autoreconf -fi;
-    ./configure;
-    sudo make distcheck
+```bash
+cd /tmp/uur/window_merge/./
+mkdir -p m4;
+autoreconf -fi;
+./configure;
+sudo make distcheck
 ```
 ## Install
-```
-    sudo make install
+```bash
+cd /tmp/uur/window_merge/./
+sudo make install
 ```

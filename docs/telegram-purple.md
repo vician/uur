@@ -1,16 +1,17 @@
 ## Download
-```
-wget -O purple-telegram.uur https://github.com/majn/telegram-purple/releases/download/v1.3.1/telegram-purple_1.3.1.orig.tar.gz
-```
+```bash
+wget -O /tmp/uur/telegram-purple/telegram-purple.1.3.1.tar.gz https://github.com/majn/telegram-purple/releases/download/v1.3.1/telegram-purple_1.3.1.orig.tar.gz
 ```
 ## Build
-```
-    cd $archivedir;
-    ./configure;
-    make
+```bash
+cd /tmp/uur/telegram-purple/./
+cd $archivedir;
+./configure;
+make
 ```
 ## Install
-```
-    cd $archivedir;
-    sudo make install
+```bash
+cd /tmp/uur/telegram-purple/./
+cd $archivedir;
+sudo make install
 ```

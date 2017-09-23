@@ -1,15 +1,17 @@
 ## Download
-```
-git clone https://github.com/segler-alex/Pidgin-GPG 
+```bash
+git clone https://github.com/segler-alex/Pidgin-GPG /tmp/uur/Pidgin-GPG/
 ```
 ## Build
-```
-    autoreconf -i;
-    ./configure;
-    make
+```bash
+cd /tmp/uur/Pidgin-GPG/./
+autoreconf -i;
+./configure;
+make
 ```
 ## Install
-```
-    mkdir -p ~/.purple/plugins;
-    cp src/.libs/pidgin_gpg.so ~/.purple/plugins/
+```bash
+cd /tmp/uur/Pidgin-GPG/./
+mkdir -p ~/.purple/plugins;
+cp src/.libs/pidgin_gpg.so ~/.purple/plugins/
 ```

@@ -11,6 +11,8 @@ if [ ! -f "$uur" ]; then
 	exit 0
 fi
 
+insidedir="."
+source .uur.sh
 
 source $uur
 
@@ -26,12 +28,13 @@ source $uur
 # - releases archive:
 # 	- file
 
-dir="/tmp/uur/${name}/"
+dir="$(get_dir $name)"
 
 if [ "$ext" ]; then # Downloading release
 	mkdir -p $dir
 	# constants
-	file="${dir}$name.$version.$ext"
+	file="$(get_file $dir $name $version $ext)"
+	#file="${dir}$name.$version.$ext"
 
 	# get the file
 	if [ ! -f "$file" ]; then
@@ -69,6 +72,7 @@ else # Clonning git repository
 	fi
 fi
 
+
 # install depends
 echo "Installing ${#depends[@]} depends"
 sudo apt install ${depends[*]}
@@ -77,10 +81,11 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
+srcdir="$(get_srcdir $name $insidedir)"
 # build
-cd $dir
+cd $srcdir
 build $dir
 
 # install
-cd $dir
+cd $srcdir
 package $dir
