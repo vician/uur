@@ -34,6 +34,10 @@ else # git clone
 fi
 echo '```' >> $doc
 
+echo "## Requirements" >> $doc
+echo '```bash' >> $doc
+echo "sudo apt install ${depends[*]}" >> $doc
+echo '```' >> $doc
 echo "## Build" >> $doc
 echo '```bash' >> $doc
 echo "cd $srcdir" >> $doc
