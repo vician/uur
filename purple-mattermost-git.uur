@@ -1,0 +1,13 @@
+#!/bin/bash
+
+name="purple-mattermost"
+url="https://github.com/EionRobb/${name}"
+depends=(libpurple-dev libjson-glib-dev libglib2.0-dev git make libmarkdown2-dev build-essential)
+
+build () {
+	make
+}
+
+package () {
+	sudo make install
+}
