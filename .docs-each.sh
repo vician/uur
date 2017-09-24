@@ -11,20 +11,28 @@ if [ ! -f "$file" ]; then
 	exit 1
 fi
 
+filename="${file%.*}"
+
 source .uur.sh
 
 source $file
 
 mkdir -p docs
 
-doc="docs/$name.md"
+doc="docs/${filename}.md"
 rm $doc
 touch $doc
 
 dir="$(get_dir $name)"
 srcdir="$(get_srcdir $name $insidedir)"
 
-echo "## Download" >> $doc
+echo "## Installation via UUR" >> $doc
+echo '```bash' >> $doc
+echo "./uur.sh $file" >> $doc
+echo '```' >> $doc
+
+echo "## Manual installation" >> $doc
+echo "### Download" >> $doc
 echo '```bash' >> $doc
 if [ "$ext" ]; then # release archive
 	file="$(get_file $dir $name $version $ext)"
@@ -34,16 +42,16 @@ else # git clone
 fi
 echo '```' >> $doc
 
-echo "## Requirements" >> $doc
+echo "### Install requirements" >> $doc
 echo '```bash' >> $doc
 echo "sudo apt install ${depends[*]}" >> $doc
 echo '```' >> $doc
-echo "## Build" >> $doc
+echo "### Build" >> $doc
 echo '```bash' >> $doc
 echo "cd $srcdir" >> $doc
 type build | tail -n +4 |sed \$d | sed 's/    //g' >> $doc
 echo '```' >> $doc
-echo "## Install" >> $doc
+echo "### Install" >> $doc
 echo '```bash' >> $doc
 echo "cd $srcdir" >> $doc
 type package | tail -n +4 |sed \$d | sed 's/    //g' >> $doc
