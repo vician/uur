@@ -16,3 +16,7 @@ build () {
 package () {
 	sudo ninja -C builddir install
 }
+
+uninstall () {
+	sudo ninja -C builddir uninstall
+}

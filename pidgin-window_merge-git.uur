@@ -14,3 +14,7 @@ build () {
 package () {
 	sudo make install
 }
+
+uninstall () {
+	sudo make uninstall
+}

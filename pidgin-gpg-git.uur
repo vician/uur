@@ -14,3 +14,7 @@ package () {
 	mkdir -p ~/.purple/plugins
 	cp src/.libs/pidgin_gpg.so ~/.purple/plugins/
 }
+
+uninstall () {
+	rm ~/.purple/plugins/pidgin_gpg.so
+}
