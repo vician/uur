@@ -23,8 +23,8 @@ doc="docs/${filename}.md"
 rm $doc
 touch $doc
 
-dir="$(get_dir $name)"
-srcdir="$(get_srcdir $name $insidedir)"
+dir="$(get_dir $filename)"
+srcdir="$(get_srcdir $filename $insidedir)"
 
 echo "## Installation via UUR" >> $doc
 echo '```bash' >> $doc
@@ -35,7 +35,7 @@ echo "## Manual installation" >> $doc
 echo "### Download" >> $doc
 echo '```bash' >> $doc
 if [ "$ext" ]; then # release archive
-	file="$(get_file $dir $name $version $ext)"
+	file="$(get_file $dir $filename $version $ext)"
 	echo "wget -O $file $url" >> $doc
 else # git clone
 	echo "git clone $url $dir" >> $doc

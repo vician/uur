@@ -10,6 +10,7 @@ if [ ! -f "$uur" ]; then
 	echo "UUR file $uur not found! Please choose different one!"
 	exit 0
 fi
+filename="${uur%.*}"
 
 source .uur.sh
 
@@ -27,13 +28,12 @@ source $uur
 # - releases archive:
 # 	- file
 
-dir="$(get_dir $name)"
+dir="$(get_dir $filename)"
 
 if [ "$ext" ]; then # Downloading release
 	mkdir -p $dir
 	# constants
-	file="$(get_file $dir $name $version $ext)"
-	#file="${dir}$name.$version.$ext"
+	file="$(get_file $dir $filename $version $ext)"
 
 	# get the file
 	if [ ! -f "$file" ]; then
@@ -80,7 +80,7 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-srcdir="$(get_srcdir $name $insidedir)"
+srcdir="$(get_srcdir $filename $insidedir)"
 # build
 cd $srcdir
 build $dir
