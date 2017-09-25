@@ -1,3 +1,8 @@
+## File structure
+
+- `/opt/uur-src` - source codes of packages
+- `/opt/uur-bin` - binary packages - unarchived (AppImage, etc.)
+
 ## Types
 
 Global variables:
@@ -38,6 +43,7 @@ Computed:
 Variables:
 
 - url (of AppImage)
+- ext (of archive if it's archived)
 - file
 
 
