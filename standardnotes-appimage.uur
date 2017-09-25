@@ -1,0 +1,20 @@
+#!/bin/bash
+
+name="desktop"
+ext="AppImage"
+version="1.2.7"
+appimagefile="standard-notes-${version}-x86_64.${ext}"
+url="https://github.com/standardnotes/${name}/releases/download/v${version}/$file"
+depends=()
+
+build () {
+	chmod +x ./${file}
+}
+
+package () {
+	./${file}
+}
+
+uninstall () {
+	rm ~/.local/share/applications/appimagekit-standard-notes.desktop
+}

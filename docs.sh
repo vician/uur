@@ -11,3 +11,5 @@ for uur in ${uurs[@]}; do
 done
 
 cp index.md docs/index.md
+
+cp README.md docs/development.md

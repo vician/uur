@@ -31,6 +31,10 @@ source $uur
 dir="$(get_dir $filename)"
 
 if [ "$ext" ]; then # Downloading release
+	if [ "$ext" == "AppImage" ]; then
+		echo "AppImage files aren't currently supported!"
+		exit 1
+	fi
 	mkdir -p $dir
 	# constants
 	file="$(get_file $dir $filename $version $ext)"
