@@ -54,3 +54,4 @@ Variables:
 - create default build() package() uninstall() functions?
 - create install of uur itself
 - how to do file structure
+- added parametr to ./uur.sh (build, uninstall, ...)

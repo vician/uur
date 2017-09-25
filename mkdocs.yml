@@ -1,4 +1,4 @@
-site_name: UUR manual build
+site_name: Ubuntu User Repository
 
 theme: material
 repo_url: 'https://github.com/vician/uur'
