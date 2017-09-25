@@ -17,10 +17,9 @@ source .uur.sh
 
 source $file
 
-mkdir -p docs
+mkdir -p docs/packages/
 
-doc="docs/${filename}.md"
-rm $doc
+doc="docs/packages/${filename}.md"
 touch $doc
 
 dir="$(get_dir $filename)"

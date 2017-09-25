@@ -1,14 +1,10 @@
 Ubuntu User Repository
 
-## Install
+## Install and use
 
 ```bash
 git clone https://github.com/vician/uur
-```
-
-## Usage
-
-```bash
+cd uur
 ./uur.sh PROGRAMNAME
 ```
 
