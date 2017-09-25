@@ -52,6 +52,7 @@ Variables:
 - verify sha checksums
 - verify signs
 - how to check update? (server requiered?)
+	- check against github specific file?
 - define ubuntu version
 - tests with Vagrant for different Ubuntu releases
 - fix uurfilename in computing file variable
@@ -61,3 +62,7 @@ Variables:
 - create install of uur itself
 - how to do file structure
 - added parametr to ./uur.sh (build, uninstall, ...)
+- put packages to special directory
+- download uur from server
+	- check if there is local file (if yes, do update)
+	- try to download the file from github => separate it to different repository?! not yet!

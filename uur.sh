@@ -16,18 +16,6 @@ source .uur.sh
 
 source $uur
 
-### Requiered ###
-# - name
-# - url
-# - depends
-# - releases archive:
-# 	- ext
-# 	- version
-### Created ###
-# - dir
-# - releases archive:
-# 	- file
-
 dir="$(get_dir $filename)"
 
 if [ "$ext" ]; then # Downloading release
