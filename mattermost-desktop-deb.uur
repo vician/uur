@@ -1,0 +1,20 @@
+#!/bin/bash
+
+type="deb"
+ext="deb"
+version="3.7.1"
+file="mattermost-desktop-${version}-linux-amd64.${ext}"
+url="https://releases.mattermost.com/desktop/${version}/${file}"
+depends=()
+
+build () {
+	;
+}
+
+package () {
+	;
+}
+
+uninstall () {
+	;
+}
