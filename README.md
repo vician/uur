@@ -45,3 +45,5 @@ Variables:
 - remove name variable
 - add unzip
 - create default build() package() uninstall() functions?
+- create install of uur itself
+- how to do file structure
