@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# clean old files
+rm -rf docs/
+
 uurs=($(ls *.uur))
 
 echo "Found ${#uurs[@]} uurs"
