@@ -1,6 +1,7 @@
 ## Types
 
 Global variables:
+
 - depends (for apt install)
 - insidedir (dir inside downloaded an unarchived files, default='.')
 Computed variables
@@ -8,6 +9,7 @@ Computed variables
 - srcdir: dir+insidedir
 
 Global functions:
+
 - build()
 - package()
 - uninstall()
@@ -15,21 +17,26 @@ Global functions:
 ### Git repository
 
 Variables:
+
 - url (of git repository)
 - tag (optional)
 - branch (optional)
 
 ### Release archive
 Variables:
+
 - url (of release archive)
 - ext (what is the extension of the file - necessery of untar/unzip)
 - version 
+
 Computed:
+
 - file (computed from dir uurfilename version ext)
 
 ### AppImage or bin file
 
 Variables:
+
 - url (of AppImage)
 - file
 
