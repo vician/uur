@@ -66,3 +66,4 @@ Variables:
 - download uur from server
 	- check if there is local file (if yes, do update)
 	- try to download the file from github => separate it to different repository?! not yet!
+- install depends first

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+url="https://github.com/CkNoSFeRaTU/pidgin"
+depends=(intltool libgtkspell-dev libidn11-dev libmeanwhile-dev network-manager-dev libperl-dev libgnutls28-dev tcl-dev tk-dev)
+
+build () {
+	./configure --disable-screensaver --disable-vv --disable-avahi
+	make
+}
+
+package () {
+	echo "nic"
+}
+
+uninstall () {
+	echo "nic"
+}
