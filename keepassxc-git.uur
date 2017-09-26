@@ -6,7 +6,7 @@ depends=()
 build () {
 	mkdir build
 	cd build
-	cmake -DWITH_TESTS=OFF ..
+	cmake -DWITH_TESTS=OFF -DWITH_XC_HTTP=ON -DWITH_XC_YUBIKEY=ON -DWITH_ASAN=ON ..
 	make -j8
 }
 
