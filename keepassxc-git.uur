@@ -1,0 +1,20 @@
+#!/bin/bash
+
+url="https://github.com/keepassxreboot/keepassxc"
+depends=()
+
+build () {
+	mkdir build
+	cd build
+	cmake -DWITH_TESTS=OFF ..
+	make -j8
+}
+
+package () {
+	cd build
+	sudo make install
+}
+
+uninstall () {
+	sudo make uninstall
+}
