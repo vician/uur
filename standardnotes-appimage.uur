@@ -8,11 +8,11 @@ url="https://github.com/standardnotes/desktop/releases/download/v${version}/$fil
 depends=()
 
 build () {
-	;;
+	:
 }
 
 package () {
-	;;
+	:
 }
 
 uninstall () {

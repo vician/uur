@@ -8,13 +8,13 @@ url="https://releases.mattermost.com/desktop/${version}/${file}"
 depends=()
 
 build () {
-	;
+	:
 }
 
 package () {
-	;
+	:
 }
 
 uninstall () {
-	;
+	:
 }

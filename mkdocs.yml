@@ -2,3 +2,5 @@ site_name: Ubuntu User Repository
 
 theme: material
 repo_url: 'https://github.com/vician/uur'
+
+google_analytics: ['UA-73656343-5', 'uur.vician.cz']
