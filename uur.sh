@@ -66,10 +66,12 @@ fi
 
 # install depends
 echo "Installing ${#depends[@]} depends"
-sudo apt install ${depends[*]}
-if [ $? -ne 0 ]; then
-	echo "ERROR: Cannot install requierments!"
-	exit 1
+if [ ${#depends[@]} -gt 0 ]; then
+	sudo apt install ${depends[*]}
+	if [ $? -ne 0 ]; then
+		echo "ERROR: Cannot install requierments!"
+		exit 1
+	fi
 fi
 
 srcdir="$(get_srcdir $filename $insidedir)"
