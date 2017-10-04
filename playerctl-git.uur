@@ -1,0 +1,17 @@
+#!/bin/bash
+
+url="https://github.com/acrisci/playerctl"
+depends=(gtk-doc-tools gobject-introspection)
+
+build () {
+	./autogen.sh --prefix=/usr
+	make
+}
+
+package () {
+	sudo make install
+}
+
+uninstall () {
+	sudo make uninstall
+}
