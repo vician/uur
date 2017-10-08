@@ -18,6 +18,39 @@ source $uur
 
 dir="$(get_dir $filename)"
 
+download_file () {
+	fileurl=$1
+	filetarget=$2
+	wget -O ${filetarget} ${fileurl}
+}
+
+unarchive_file() {
+	archivefile=$1
+	targetdir=$2
+
+	# detect extension
+	ext=$()
+
+	if [ "$ext" == "zip" ]; then
+		:
+	elif [ "ext" == "tar.gz" ] || [ "ext" == "tar.bz" ]; then
+		tar -xf $archivefile -C $targetdir
+	else
+		echo "Unsupported archive format!"
+	fi
+}
+
+if [ "type" == "AppImage" ]; then
+	srcdir="$(get_srcdir $name)"
+	bindir="$(get_bindir $name)"
+	download_file $url $srcdir
+elif [ "type" == "release" ]; then
+elif [ "type" == "bin" ]; then
+elif [ "type" == "deb" ]; then
+elif [ "type" == "repo" ]; then
+	:
+fi
+
 if [ "$ext" ]; then # Downloading release
 	if [ "$ext" == "AppImage" ]; then
 		echo "AppImage files aren't currently supported!"
