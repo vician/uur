@@ -16,7 +16,7 @@ source .uur.sh
 
 source $uur
 
-dir="$(get_dir $filename)"
+#dir="$(get_dir $filename)"
 
 download_file () {
 	fileurl=$1
@@ -41,24 +41,29 @@ unarchive_file() {
 }
 
 if [ "type" == "AppImage" ]; then
-	srcdir="$(get_srcdir $name)"
-	bindir="$(get_bindir $name)"
+	srcdir="$(get_srcdir $filename)"
+	bindir="$(get_bindir $filename)"
 	download_file $url $srcdir
 elif [ "type" == "release" ]; then
+	:
 elif [ "type" == "bin" ]; then
+	:
 elif [ "type" == "deb" ]; then
+	:
 elif [ "type" == "repo" ]; then
 	:
 fi
+srcdir="$(get_srcdir $filename)"
+bindir="$(get_bindir $filename)"
 
 if [ "$ext" ]; then # Downloading release
 	if [ "$ext" == "AppImage" ]; then
 		echo "AppImage files aren't currently supported!"
 		exit 1
 	fi
-	mkdir -p $dir
+	mkdir -p $srcdir
 	# constants
-	file="$(get_file $dir $filename $version $ext)"
+	file="$(get_file $srcdir $filename $version $ext)"
 
 	# get the file
 	if [ ! -f "$file" ]; then
@@ -73,21 +78,21 @@ if [ "$ext" ]; then # Downloading release
 	fi
 	# untar xz
 	echo "untaring"
-	tar -xf $file -C $dir
+	tar -xf $file -C $srcdir
 	if [ $? -ne 0 ]; then
 		echo "ERROR Cannot untar release archive!"
 		exit 1
 	fi
 else # Clonning git repository
-	if [ ! -d "$dir" ]; then
-		mkdir -p $dir
-		git clone $url $dir
+	if [ ! -d "$srcdir" ]; then
+		mkdir -p $srcdir
+		git clone $url $srcdir
 		if [ $? -ne 0 ]; then
 			echo "ERROR: Cannot clone gir repository!"
 			exit 1
 		fi
 	else
-		cd $dir
+		cd $srcdir
 		git pull
 		if [ $? -ne 0 ]; then
 			echo "ERROR: Cannot pull git repository!"
@@ -107,11 +112,11 @@ if [ ${#depends[@]} -gt 0 ]; then
 	fi
 fi
 
-srcdir="$(get_srcdir $filename $insidedir)"
+srcinsidedir="$(get_insidedir $filename $insidedir)"
 # build
-cd $srcdir
-build $dir
+cd $srcinsidedir
+build $srcinsidedir
 
 # install
-cd $srcdir
-package $dir
+cd $srcinsidedir
+package $srcdir

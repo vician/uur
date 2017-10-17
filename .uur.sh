@@ -1,8 +1,8 @@
 #!/bin/bash
 insidedir="."
 
-uur_packages_sources="/opt/uur/src/"
-uur_packages_bins="/opt/uur/bin/"
+uur_packages_src="/opt/uur/src/"
+uur_packages_bin="/opt/uur/bin/"
 
 get_srcdir () {
 	name=$1

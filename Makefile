@@ -1,6 +1,12 @@
 PIDFILE="server.pid"
 LISTEN="127.0.0.1:8101"
 
+install:
+	sudo apt install python3-pip
+	sudo pip3 install mkdocs mkdocs-material
+	sudo mkdir /opt/uur
+	sudo chown martin:martin /opt/uur
+
 start:
 	mkdocs serve --dev-addr=$(LISTEN) 1>/dev/null 2>/dev/null & echo $$! > $(PIDFILE)
 
