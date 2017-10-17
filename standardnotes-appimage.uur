@@ -2,7 +2,7 @@
 
 type="AppImage"
 ext="${type}"
-version="1.2.7"
+version="2.0.0"
 file="standard-notes-${version}-x86_64.${ext}"
 url="https://github.com/standardnotes/desktop/releases/download/v${version}/$file"
 depends=()
@@ -17,4 +17,5 @@ package () {
 
 uninstall () {
 	rm ~/.local/share/applications/appimagekit-standard-notes.desktop
+	find ~/.local/share/icons/ -name "*standard-notes*" -exec rm -rf {} \;
 }
