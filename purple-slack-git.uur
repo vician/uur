@@ -1,0 +1,12 @@
+#!/bin/bash
+
+url="https://github.com/dylex/slack-libpurple"
+depends=(libpurple-dev build-essential libcurl4-openssl-dev)
+
+build () {
+	make
+}
+
+package () {
+	sudo make install
+}
