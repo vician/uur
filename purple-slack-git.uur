@@ -4,7 +4,8 @@ url="https://github.com/dylex/slack-libpurple"
 depends=(libpurple-dev build-essential libcurl4-openssl-dev)
 
 build () {
-	patch -p1 api-token-in-passwd.patch
+	wget "https://raw.githubusercontent.com/vician/uur/master/purple-slack.patch"
+	patch -p1 purple-slack.patch
 	make
 }
 
