@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# cryfs-gui
+
+url="https://github.com/mhogomchungu/sirikali"
+depends=(cmake libpwquality-dev qtbase5-dev cryfs)
+
+build () {
+	mkdir -p build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr -DQT5=true -DCMAKE_BUILD_TYPE=RELEASE . ..
+	make
+}
+
+package () {
+	cd build
+	sudo make install
+}
+
+uninstall () {
+	sudo make uninstall
+}
