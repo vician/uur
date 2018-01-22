@@ -1,5 +1,7 @@
 #!/bin/bash
 
+type="git"
+
 url="https://github.com/dm0-/window_merge"
 depends_apt=(git libtool autoconf pidgin pidgin-dev)
 

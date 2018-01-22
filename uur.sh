@@ -58,59 +58,19 @@ if [ "${type}" == "appimage" ]; then
 elif [ "${type}" == "tar" ]; then
 	download_file $url $srcdir/$filename
 	untar_file $srcdir
-elif [ "type" == "bin" ]; then
+elif [ "${type}" == "bin" ]; then
 	:
-elif [ "type" == "deb" ]; then
+elif [ "${type}" == "deb" ]; then
 	:
-elif [ "type" == "repo" ]; then
-	:
-fi
-
-if [ "$ext" ]; then # Downloading release
-	if [ "$ext" == "AppImage" ]; then
-		echo "AppImage files aren't currently supported!"
-		exit 1
-	fi
-	mkdir -p $srcdir
-	# constants
-	file="$(get_file $srcdir $uurname $version $ext)"
-
-	# get the file
-	if [ ! -f "$file" ]; then
-		echo "Downloading file from $url"
-		wget -O ${file} "$url"
-		if [ $? -ne 0 ]; then
-			echo "ERROR: Download release archive failed!"
-			exit 1
-		fi
-	else
-		echo "File already downloaded"
-	fi
-	# untar xz
-	echo "untaring"
-	tar -xf $file -C $srcdir
-	if [ $? -ne 0 ]; then
-		echo "ERROR Cannot untar release archive!"
-		exit 1
-	fi
-else # Clonning git repository
-	if [ ! -d "$srcdir" ]; then
-		mkdir -p $srcdir
-		git clone $url $srcdir
-		if [ $? -ne 0 ]; then
-			echo "ERROR: Cannot clone gir repository!"
-			exit 1
-		fi
-	else
-		cd $srcdir
+elif [ "${type}" == "git" ]; then
+	if [ -d "$srcdir" ]; then
+		cd "$srcdir"
 		git pull
-		if [ $? -ne 0 ]; then
-			echo "ERROR: Cannot pull git repository!"
-			exit 1
-		fi
+		cd $base_dir
+	else
+		git clone $url $srcdir
 	fi
 fi
-
 
 # install depends
 echo "Installing ${#depends[@]} depends"
