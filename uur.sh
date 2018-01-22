@@ -1,5 +1,7 @@
 #!/bin/bash
 
+base_dir=$(dirname $(realpath $0))
+
 if [ $# -ne 1 ]; then
 	echo "Please specifiy urr file, e.q.: $0 gradio.uur"
 	exit 0
@@ -7,16 +9,20 @@ fi
 
 uur="$1"
 if [ ! -f "$uur" ]; then
-	echo "UUR file $uur not found! Please choose different one!"
-	exit 0
+	# switch to directort with this script
+	uur="${base_dir}/repo/${uur}.uur"
+	if [ ! -f "$uur" ]; then
+		echo "UUR file $uur not found! Please choose different one!"
+		exit 0
+	fi
 fi
-filename="${uur%.*}"
+uurname="${uur%.*}"
 
-source .uur.sh
+source ${base_dir}/.uur.sh
 
 source $uur
 
-#dir="$(get_dir $filename)"
+#dir="$(get_dir $uurname)"
 
 download_file () {
 	fileurl=$1
@@ -24,28 +30,34 @@ download_file () {
 	wget -O ${filetarget} ${fileurl}
 }
 
-unarchive_file() {
+untar_file() {
+	archivefile=$1
+	targetdir=$2
+	tar -xf $archivefile -C $targetdir
+	if [ $? -ne 0 ]; then
+		echo "Untar failed!"
+		exit 0
+	fi
+}
+unzip_file() {
 	archivefile=$1
 	targetdir=$2
 
-	# detect extension
-	ext=$()
-
-	if [ "$ext" == "zip" ]; then
-		:
-	elif [ "ext" == "tar.gz" ] || [ "ext" == "tar.bz" ]; then
-		tar -xf $archivefile -C $targetdir
-	else
-		echo "Unsupported archive format!"
+	unzip $archivefile -d $targetdir
+	if [ $? -ne 0 ]; then
+		echo "Unzip failed!"
+		exit 0
 	fi
 }
 
-if [ "type" == "AppImage" ]; then
-	srcdir="$(get_srcdir $filename)"
-	bindir="$(get_bindir $filename)"
+srcdir="$(get_srcdir $uurname)"
+bindir="$(get_bindir $uurname)"
+
+if [ "${type}" == "appimage" ]; then
 	download_file $url $srcdir
-elif [ "type" == "release" ]; then
-	:
+elif [ "${type}" == "tar" ]; then
+	download_file $url $srcdir/$filename
+	untar_file $srcdir
 elif [ "type" == "bin" ]; then
 	:
 elif [ "type" == "deb" ]; then
@@ -53,8 +65,6 @@ elif [ "type" == "deb" ]; then
 elif [ "type" == "repo" ]; then
 	:
 fi
-srcdir="$(get_srcdir $filename)"
-bindir="$(get_bindir $filename)"
 
 if [ "$ext" ]; then # Downloading release
 	if [ "$ext" == "AppImage" ]; then
@@ -63,7 +73,7 @@ if [ "$ext" ]; then # Downloading release
 	fi
 	mkdir -p $srcdir
 	# constants
-	file="$(get_file $srcdir $filename $version $ext)"
+	file="$(get_file $srcdir $uurname $version $ext)"
 
 	# get the file
 	if [ ! -f "$file" ]; then
@@ -112,11 +122,11 @@ if [ ${#depends[@]} -gt 0 ]; then
 	fi
 fi
 
-srcinsidedir="$(get_insidedir $filename $insidedir)"
+srcinsidedir="$(get_insidedir $uurname $insidedir)"
 # build
 cd $srcinsidedir
-build $srcinsidedir
+do_build $srcinsidedir
 
 # install
 cd $srcinsidedir
-package $srcdir
+do_install $srcinsidedir

@@ -1,8 +1,15 @@
 #!/bin/bash
 insidedir="."
 
-uur_packages_src="/opt/uur/src/"
-uur_packages_bin="/opt/uur/bin/"
+uur_packages_src="~/.uur/src/"
+uur_packages_bin="~/.uur/bin/"
+
+if [ ! -d "$uur_packages_src" ]; then
+	mkdir -p "$uur_packages_src"
+fi
+if [ ! -d "$uur_packages_bin" ]; then
+	mkdir -p "$uur_packages_bin"
+fi
 
 get_srcdir () {
 	name=$1
@@ -34,14 +41,14 @@ get_file () {
 }
 
 # Default empty functions
-build () {
+do_build () {
 	:
 }
 
-package () {
+do_install () {
 	:
 }
 
-uninstall () {
+do_uninstall () {
 	:
 }

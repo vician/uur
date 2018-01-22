@@ -1,20 +1,19 @@
 #!/bin/bash
 
-name="window_merge"
-url="https://github.com/dm0-/${name}"
-depends=(git libtool autoconf pidgin pidgin-dev)
+url="https://github.com/dm0-/window_merge"
+depends_apt=(git libtool autoconf pidgin pidgin-dev)
 
-build () {
+do_build () {
 	mkdir -p m4
 	autoreconf -fi
 	./configure
 	sudo make distcheck
 }
 
-package () {
+do_install () {
 	sudo make install
 }
 
-uninstall () {
+do_uninstall () {
 	sudo make uninstall
 }
