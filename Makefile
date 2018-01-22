@@ -1,5 +1,5 @@
 PIDFILE="server.pid"
-LISTEN="127.0.0.1:8101"
+LISTEN="127.0.0.1:8104"
 
 install:
 	sudo apt install python3-pip
