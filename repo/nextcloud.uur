@@ -1,0 +1,12 @@
+#!/bin/bash
+
+type="nop"
+
+do_build() {
+	sudo add-apt-repository ppa:nextcloud-devs/client
+}
+
+do_install() {
+	sudo apt update
+	sudo apt install nextcloud-client nextcloud-client-nautilus
+}

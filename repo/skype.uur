@@ -1,0 +1,5 @@
+#!/bin/bash
+
+type="deb"
+url="https://get.skype.com/getskype-webwrap-deb"
+filename="skypeforlinux-64.deb"

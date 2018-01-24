@@ -1,0 +1,17 @@
+#!/bin/bash
+
+type="tar"
+version="1.2.6"
+url="https://telegram.org/dl/desktop/linux"
+filename="tsetup.${version}.tar.xz"
+insidedir="Telegram"
+
+do_install() {
+	./Telegram
+}
+
+do_uninstall(){
+	rm -rf ./.local/share/TelegramDesktop
+	rm -f ./.local/share/applications/telegramdesktop.desktop
+	rm -f ./.local/share/icons/telegram.png
+}
