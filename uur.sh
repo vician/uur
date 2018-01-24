@@ -20,6 +20,9 @@ fi
 uurname="$(basename $(realpath $uur))"
 uurname="${uurname%.*}"
 
+echo "uurname: $uurname"
+echo "uurfile: $uur"
+
 source ${base_dir}/.uur.sh
 
 source $uur
@@ -62,6 +65,22 @@ unzip_file() {
 	fi
 }
 
+appimage_install() {
+	srcdir=$1
+	filename=$2
+
+	chmod +x $srcdir/$filename
+	echo "Running $srcdir/$filename for installation."
+	$srcdir/$filename
+}
+
+appimage_uninstall() {
+	srcdir=$1
+	filename=$2
+
+	rm $srcdir/$filename
+}
+
 srcdir="$(get_srcdir $uurname)"
 
 if [ "$url" == "" ]; then
@@ -69,8 +88,9 @@ if [ "$url" == "" ]; then
 	exit 1
 fi
 
-if [ "$type" == "appimage" ]; then
-	download_file $url $srcdir
+if [ "$type" == "appimage" ] || [ "$type" == "AppImage" ]; then
+	download_file $url $srcdir $filename
+	appimage_install $srcdir $filename
 elif [ "$type" == "tar" ]; then
 	download_file $url $srcdir $filename
 	untar_file $srcdir/$filename $srcdir
@@ -86,6 +106,9 @@ elif [ "$type" == "git" ]; then
 	else
 		git clone $url $srcdir
 	fi
+else
+	echo "ERROR: Unknown type!"
+	exit 1
 fi
 
 # install depends

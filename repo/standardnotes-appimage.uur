@@ -1,21 +1,12 @@
 #!/bin/bash
 
 type="AppImage"
-ext="${type}"
-version="2.0.0"
-file="standard-notes-${version}-x86_64.${ext}"
-url="https://github.com/standardnotes/desktop/releases/download/v${version}/$file"
-depends=()
+version="2.0.42"
+filename="standard-notes-${version}-x86_64.AppImage"
+url="https://github.com/standardnotes/desktop/releases/download/v${version}/$filename"
+depends_apt=()
 
-build () {
-	:
-}
-
-package () {
-	:
-}
-
-uninstall () {
+do_uninstall () {
 	rm ~/.local/share/applications/appimagekit-standard-notes.desktop
 	find ~/.local/share/icons/ -name "*standard-notes*" -exec rm -rf {} \;
 }
