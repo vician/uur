@@ -2,7 +2,7 @@
 
 type="git"
 
-url="git@github.com:vician/pause-on-lock"
+url="https://github.com/vician/pause-on-lock"
 
 do_install() {
 cat > $HOME/.config/autostart/pause-on-lock.desktop << EOF
