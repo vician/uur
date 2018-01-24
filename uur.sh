@@ -133,7 +133,7 @@ elif [ "$type" == "deb" ]; then
 	download_file $url $srcdir $filename
 	sudo gdebi $srcdir/$filename
 elif [ "$type" == "git" ]; then
-	if [ -d "$srcdir" ]; then
+	if [ -d "$srcdir/.git" ]; then
 		cd "$srcdir"
 		git pull
 		cd $base_dir

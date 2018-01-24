@@ -1,0 +1,20 @@
+#!/bin/bash
+
+type="git"
+
+url="git@github.com:vician/pause-on-lock"
+
+do_install() {
+cat > $HOME/.config/autostart/pause-on-lock.desktop << EOF
+[Desktop Entry]
+Type=Application
+Exec=${srcdir}pause-on-lock noresume
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=pause-on-lock
+Name=pause-on-lock-
+Comment[en_US]=Will pause media on screen lock
+Comment=Will pause media on screen lock
+EOF
+}
