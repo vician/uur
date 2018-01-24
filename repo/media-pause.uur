@@ -1,0 +1,17 @@
+#!/bin/bash
+
+type="git"
+
+url="https://github.com/vician/media-pause"
+
+do_install() {
+	if [ "$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)" != "@as []" ]; then echo "some shortcuts already configured, please do it manually!"; exit 1; fi
+	gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+	gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'media-pause'
+	if [ $? -ne 0 ]; then echo "set name error"; fi
+	gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/opt/uur/media-pause/media-pause.sh toggle spotify'
+	if [ $? -ne 0 ]; then echo "set command error"; fi
+	gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>w'
+	if [ $? -ne 0 ]; then echo "set binding error"; fi
+	gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings
+}
