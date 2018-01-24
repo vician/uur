@@ -1,6 +1,7 @@
 #!/bin/bash
 
 type="nop"
+depends_apt=(cryfs)
 
 do_build() {
 	wget -nv https://download.opensuse.org/repositories/home:obs_mhogomchungu/xUbuntu_17.10/Release.key -O Release.key
