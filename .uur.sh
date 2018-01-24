@@ -10,7 +10,7 @@ fi
 
 get_srcdir () {
 	name=$1
-	dir="${uur_packages_src}/${name}/"
+	dir="${uur_packages_src}${name}/"
 	if [ ! -d "$dir" ]; then
 		mkdir "$dir"
 	fi
@@ -21,7 +21,7 @@ get_insidedir () {
 	name=$1
 	srcdir=$(get_srcdir $name)
 	insidedir="$2"
-	fulldir="${srcdir}/${insidedir}/"
+	fulldir="${srcdir}${insidedir}/"
 	echo $fulldir
 }
 

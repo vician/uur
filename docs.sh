@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # clean old files
-rm -rf docs/
+rm -rf docs/packages/*
+mkdir -p docs/packages/
 
-uurs=($(ls *.uur))
+uurs=($(ls repo/*.uur))
 
 echo "Found ${#uurs[@]} uurs"
 
