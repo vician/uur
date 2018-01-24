@@ -2,8 +2,17 @@
 
 base_dir=$(dirname $(realpath $0))
 
-if [ $# -ne 1 ]; then
+if [ $# -eq 0 ]; then
 	echo "Please specifiy urr file, e.q.: $0 gradio.uur"
+	exit 0
+fi
+
+if [ $# -gt 1 ]; then
+	echo "Multiple uurs, separated to each"
+	for param in $@; do
+		$0 $param
+		echo "======================================"
+	done
 	exit 0
 fi
 
