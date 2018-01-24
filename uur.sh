@@ -16,8 +16,9 @@ if [ ! -f "$uur" ]; then
 		exit 0
 	fi
 fi
-uurname="$(basename $uurname)"
-uurname="${uur%.*}"
+
+uurname="$(basename $(realpath $uur))"
+uurname="${uurname%.*}"
 
 source ${base_dir}/.uur.sh
 
@@ -25,13 +26,25 @@ source $uur
 
 download_file () {
 	fileurl=$1
-	filetarget=$2
-	wget -O ${filetarget} ${fileurl}
+	targetdir=$2
+	filename=$3
+
+	if [ ! -d "$targetdir" ]; then
+		mkdir "$targetdir"
+	fi
+
+	echo "Downloading $fileurl to $targetdir/$filename"
+	wget -O ${targetdir}/$filename ${fileurl}
+	if [ $? -ne 0 ]; then
+		echo "Downloading failed!"
+		exit 0
+	fi
 }
 
 untar_file() {
 	archivefile=$1
 	targetdir=$2
+	echo "Untaring $archivefile to $targetdir"
 	tar -xf $archivefile -C $targetdir
 	if [ $? -ne 0 ]; then
 		echo "Untar failed!"
@@ -59,8 +72,8 @@ fi
 if [ "$type" == "appimage" ]; then
 	download_file $url $srcdir
 elif [ "$type" == "tar" ]; then
-	download_file $url $srcdir/$filename
-	untar_file $srcdir
+	download_file $url $srcdir $filename
+	untar_file $srcdir/$filename $srcdir
 elif [ "$type" == "bin" ]; then
 	:
 elif [ "$type" == "deb" ]; then
@@ -76,7 +89,7 @@ elif [ "$type" == "git" ]; then
 fi
 
 # install depends
-echo "Installing ${#depends_apt[@]} depends"
+echo "Installing ${#depends_apt[@]} depends: ${depends_apt[*]}"
 if [ ${#depends_apt[@]} -gt 0 ]; then
 	sudo apt install ${depends_apt[*]}
 	if [ $? -ne 0 ]; then
@@ -86,6 +99,12 @@ if [ ${#depends_apt[@]} -gt 0 ]; then
 fi
 
 srcinsidedir="$(get_insidedir $uurname $insidedir)"
+
+if [ ! -d "$srcinsidedir" ]; then
+	echo "ERROR: $srcinsidedir doesn't exist!"
+	exit 1
+fi
+
 # build
 cd $srcinsidedir
 do_build $srcinsidedir
