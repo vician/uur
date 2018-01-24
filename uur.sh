@@ -70,15 +70,46 @@ appimage_install() {
 	filename=$2
 
 	chmod +x $srcdir/$filename
+	if [ $? -ne 0 ]; then
+		echo "chmod +x $srcdir/$filename failed!!"
+		exit 1
+	fi
 	echo "Running $srcdir/$filename for installation."
 	$srcdir/$filename
 }
 
-appimage_uninstall() {
+deb_install() {
+	srcdir=$1
+	filename=$2
+
+	which gdebi 1>/dev/null 2>/dev/null
+	if [ $? -ne 0 ]; then
+		echo "Needs to install gdebi"
+		sudo apt install gdebi
+		if [ $? -ne 0 ]; then
+			echo "Gdebi installation failed!"
+			exit 1
+		fi
+	fi
+
+	echo "Gdebi installation of $srcdir/$filename"
+	sudo gdebi $srcdir/$filename
+	if [ $? -ne 0 ]; then
+		echo "Installation failed!"
+		exit 1
+	fi
+}
+
+# for appimage, deb or bin
+bin_uninstall() {
 	srcdir=$1
 	filename=$2
 
 	rm $srcdir/$filename
+	if [ $? -ne 0 ]; then
+		echo "Removing $srcdir/$filename failed!!"
+		exit 1
+	fi
 }
 
 srcdir="$(get_srcdir $uurname)"
@@ -97,7 +128,8 @@ elif [ "$type" == "tar" ]; then
 elif [ "$type" == "bin" ]; then
 	:
 elif [ "$type" == "deb" ]; then
-	:
+	download_file $url $srcdir $filename
+	sudo gdebi $srcdir/$filename
 elif [ "$type" == "git" ]; then
 	if [ -d "$srcdir" ]; then
 		cd "$srcdir"
