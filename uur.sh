@@ -114,9 +114,11 @@ bin_uninstall() {
 
 srcdir="$(get_srcdir $uurname)"
 
-if [ "$url" == "" ]; then
-	echo "Missing URL!"
-	exit 1
+if [ "$type" != "nope" ] && [ $type != "nop" ]; then
+	if [ "$url" == "" ]; then
+		echo "Missing URL!"
+		exit 1
+	fi
 fi
 
 if [ "$type" == "appimage" ] || [ "$type" == "AppImage" ]; then
@@ -138,10 +140,13 @@ elif [ "$type" == "git" ]; then
 	else
 		git clone $url $srcdir
 	fi
+elif [ "$type" == "nop" ]; then
+	:
 else
 	echo "ERROR: Unknown type!"
 	exit 1
 fi
+
 
 # install depends
 echo "Installing ${#depends_apt[@]} depends: ${depends_apt[*]}"

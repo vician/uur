@@ -11,6 +11,9 @@ fi
 get_srcdir () {
 	name=$1
 	dir="${uur_packages_src}/${name}/"
+	if [ ! -d "$dir" ]; then
+		mkdir "$dir"
+	fi
 	echo $dir
 }
 
