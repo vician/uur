@@ -1,0 +1,8 @@
+#!/bin/bash
+
+type="git"
+url="https://github.com/vician/sshproxy"
+
+do_install() {
+	sudo ln -s ${1}sshproxy.sh /usr/local/bin/sshproxy
+}
