@@ -1,25 +1,16 @@
 #!/bin/bash
 insidedir="."
 
-uur_packages_src="~/.uur/src/"
-uur_packages_bin="~/.uur/bin/"
+uur_packages_src="/opt/uur/"
 
 if [ ! -d "$uur_packages_src" ]; then
-	mkdir -p "$uur_packages_src"
-fi
-if [ ! -d "$uur_packages_bin" ]; then
-	mkdir -p "$uur_packages_bin"
+	sudo mkdir -p "$uur_packages_src"
+	sudo chown $USER:$USER "$uur_packages_src"
 fi
 
 get_srcdir () {
 	name=$1
 	dir="${uur_packages_src}/${name}/"
-	echo $dir
-}
-
-get_bindir () {
-	name=$1
-	dir="${uur_packages_bin}/${name}/"
 	echo $dir
 }
 
@@ -29,15 +20,6 @@ get_insidedir () {
 	insidedir="$2"
 	fulldir="${srcdir}/${insidedir}/"
 	echo $fulldir
-}
-
-get_file () {
-	dir=$1
-	name=$2
-	version=$3
-	ext=$4
-	file="${dir}${name}.${version}.${ext}"
-	echo $file
 }
 
 # Default empty functions

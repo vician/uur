@@ -16,13 +16,12 @@ if [ ! -f "$uur" ]; then
 		exit 0
 	fi
 fi
+uurname="$(basename $uurname)"
 uurname="${uur%.*}"
 
 source ${base_dir}/.uur.sh
 
 source $uur
-
-#dir="$(get_dir $uurname)"
 
 download_file () {
 	fileurl=$1
@@ -51,18 +50,22 @@ unzip_file() {
 }
 
 srcdir="$(get_srcdir $uurname)"
-bindir="$(get_bindir $uurname)"
 
-if [ "${type}" == "appimage" ]; then
+if [ "$url" == "" ]; then
+	echo "Missing URL!"
+	exit 1
+fi
+
+if [ "$type" == "appimage" ]; then
 	download_file $url $srcdir
-elif [ "${type}" == "tar" ]; then
+elif [ "$type" == "tar" ]; then
 	download_file $url $srcdir/$filename
 	untar_file $srcdir
-elif [ "${type}" == "bin" ]; then
+elif [ "$type" == "bin" ]; then
 	:
-elif [ "${type}" == "deb" ]; then
+elif [ "$type" == "deb" ]; then
 	:
-elif [ "${type}" == "git" ]; then
+elif [ "$type" == "git" ]; then
 	if [ -d "$srcdir" ]; then
 		cd "$srcdir"
 		git pull
@@ -73,9 +76,9 @@ elif [ "${type}" == "git" ]; then
 fi
 
 # install depends
-echo "Installing ${#depends[@]} depends"
-if [ ${#depends[@]} -gt 0 ]; then
-	sudo apt install ${depends[*]}
+echo "Installing ${#depends_apt[@]} depends"
+if [ ${#depends_apt[@]} -gt 0 ]; then
+	sudo apt install ${depends_apt[*]}
 	if [ $? -ne 0 ]; then
 		echo "ERROR: Cannot install requierments!"
 		exit 1
