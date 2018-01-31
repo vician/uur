@@ -1,0 +1,12 @@
+#!/bin/bash
+
+type="AppImage"
+version="0.10.51"
+filename="Joplin-${version}-x86_64.AppImage"
+url="https://github.com/laurent22/joplin/releases/download/v${version}/${filename}"
+depends_apt=()
+
+do_uninstall () {
+	rm ~/.local/share/applications/appimagekit-standard-notes.desktop
+	find ~/.local/share/icons/ -name "*standard-notes*" -exec rm -rf {} \;
+}
