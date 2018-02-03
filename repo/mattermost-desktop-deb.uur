@@ -2,6 +2,6 @@
 
 type="deb"
 
-version="3.7.1"
+version="4.0.0"
 filename="mattermost-desktop-${version}-linux-amd64.deb"
-url="https://releases.mattermost.com/desktop/3.7.1/mattermost-desktop-3.7.1-linux-amd64.deb"
+url="https://releases.mattermost.com/desktop/${version}/mattermost-desktop-${version}-linux-amd64.deb"
