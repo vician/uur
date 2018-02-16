@@ -2,6 +2,6 @@
 
 type="deb"
 
-version="0.8.20"
+version="0.9.0"
 filename="boostnote_${version}_amd64.deb"
 url="https://github.com/BoostIO/boost-releases/releases/download/v${version}/$filename"
