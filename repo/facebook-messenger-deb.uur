@@ -1,0 +1,7 @@
+#!/bin/bash
+
+type="deb"
+
+version="2.0.9"
+filename="messengerfordesktop-${version}-linux-amd64.deb"
+url="https://updates.messengerfordesktop.com/download/linux/latest/beta?arch=amd64&pkg=deb"
