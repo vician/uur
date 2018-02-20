@@ -4,4 +4,4 @@ type="deb"
 
 version="4.0.0"
 filename="mattermost-desktop-${version}-linux-amd64.deb"
-url="https://releases.mattermost.com/desktop/${version}/mattermost-desktop-${version}-linux-amd64.deb"
+url="https://releases.mattermost.com/desktop/${version}/${filename}"
