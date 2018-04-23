@@ -1,7 +1,7 @@
 #!/bin/bash
 
 type="AppImage"
-version="2.1.23"
+version="2.1.28"
 filename="standard-notes-${version}-x86_64.AppImage"
 url="https://github.com/standardnotes/desktop/releases/download/v${version}/$filename"
 depends_apt=()
